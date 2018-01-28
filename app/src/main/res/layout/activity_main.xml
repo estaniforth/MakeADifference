@@ -18,6 +18,15 @@ tools:context="bitsplease.makeadifference.MainActivity">
     android:layout_centerHorizontal="true"
     android:gravity="center"
     android:text="Create chat head"/>
+
+    <Button
+        android:id="@+id/profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notify_me"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Profile" />
 </RelativeLayout>
 
     <!--<?xml version="1.0" encoding="utf-8"?>
