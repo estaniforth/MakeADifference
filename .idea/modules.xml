@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MakeADifference.iml" filepath="$PROJECT_DIR$/MakeADifference.iml" />
-      <module fileurl="file://C:\Projects\MakeADifference\MakeADifference.iml" filepath="C:\Projects\MakeADifference\MakeADifference.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Projects\MakeADifference\app\app.iml" filepath="C:\Projects\MakeADifference\app\app.iml" />
     </modules>
   </component>
 </project>
