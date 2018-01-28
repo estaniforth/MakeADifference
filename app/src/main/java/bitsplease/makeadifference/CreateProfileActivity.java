@@ -13,12 +13,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +38,9 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
 
+    //defining database
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,9 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //initializing database
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         if(firebaseAuth.getCurrentUser() == null){
             //closing this activity
@@ -90,6 +101,10 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d("CreateProfileActivity", "User profile updated.");
+
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            writeNewUser(user.getEmail(), user.getUid(), user.getDisplayName());
+
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         }
                     }
@@ -111,6 +126,14 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 //                    }
 //                });
 
+    }
+
+    private void writeNewUser(String email, String userId, String name) {
+        Map<String, Goal> map = new HashMap<String, Goal>();
+        map.put("goal1", new Goal(1));
+        User user = new User(email, name, map);
+
+        mDatabase.child("users").child(userId).setValue(user);
     }
 
     @Override

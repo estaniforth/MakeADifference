@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,6 +36,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
 
+    //defining database
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
+
+        //initializing database
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         if(firebaseAuth.getCurrentUser() == null){
             //closing this activity
@@ -101,6 +109,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d("EditProfileActivity", "User profile updated.");
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            mDatabase.child("users").child(user.getUid()).child("name").setValue(user.getDisplayName());
                             startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         }
                     }
@@ -111,6 +121,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            mDatabase.child("users").child(user.getUid()).child("email").setValue(user.getEmail());
                             Log.d("EditProfileActivity", "User email address updated.");
                         }
                     }
