@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- <activity android:name=".MainActivity" /> -->
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".FeedActivity"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".ChatHeadService"
@@ -34,6 +37,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CreateProfileActivity" />
         <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".ProjectOverviewActivity"></activity>
     </application>
 
 </manifest>
