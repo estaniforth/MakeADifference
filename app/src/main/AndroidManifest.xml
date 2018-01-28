@@ -38,7 +38,8 @@
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".ProjectOverviewActivity" />
-        <activity android:name=".NewPostActivity"></activity>
+        <activity android:name=".GoalManagerActivity" />
+        <activity android:name=".NewGoalActivity"></activity>
     </application>
 
 </manifest>

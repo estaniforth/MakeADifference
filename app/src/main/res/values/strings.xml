@@ -38,4 +38,29 @@
     <string name="rank">Captain</string>
     <string name="pointValue">230</string>
     <string name="dashboard">Dashboard</string>
+    <string-array name="time_array">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>2 hours</item>
+        <item>3 hours</item>
+        <item>4 hours</item>
+        <item>5 hours</item>
+        <item>6 hours</item>
+        <item>7 hours</item>
+        <item>8 hours</item>
+        <item>9 hours</item>
+        <item>10 hours</item>
+        <item>11 hours</item>
+        <item>12 hours</item>
+        <item>13 hours</item>
+        <item>14 hours</item>
+        <item>15 hours</item>
+        <item>16 hours</item>
+        <item>17 hours</item>
+        <item>18 hours</item>
+        <item>19 hours</item>
+        <item>20 hours</item>
+    </string-array>
+    <string name="start_prompt">Select</string>
 </resources>

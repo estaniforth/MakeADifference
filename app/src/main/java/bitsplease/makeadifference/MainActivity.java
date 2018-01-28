@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.NavigableMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,11 +22,19 @@ public class MainActivity extends AppCompatActivity {
     Button buttonFeed;
     Button buttonDashboard;
     Button buttonProfile;
+    Button buttonLogout;
+
+    //firebase auth object
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //initializing firebase auth object
+        firebaseAuth = FirebaseAuth.getInstance();
 
         //Check if the application has draw over other apps permission or not?
         //This permission is by default available for API<23. But for API > 23
@@ -60,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
         buttonProfile.setOnClickListener( new View.OnClickListener(){
             public void onClick (View v){
                 startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            }
+        });
+
+        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        buttonLogout.setOnClickListener( new View.OnClickListener(){
+            public void onClick (View v){
+                //logging out the user
+                firebaseAuth.signOut();
+                //closing activity
+                finish();
+                //starting login activity
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
 

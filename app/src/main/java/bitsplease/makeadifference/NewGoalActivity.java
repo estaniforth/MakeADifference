@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
-
+import android.widget.Spinner;
 import java.util.HashMap;
-import java.util.Map;
+import bitsplease.makeadifference.User;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,13 +24,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
-public class CreateProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class NewGoalActivity extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
-    private TextView textView;
     private EditText editTextName;
-    private Button buttonNext;
+    private Button buttonSave;
+    private Spinner spinnerStart;
+    private Spinner spinnerEnd;
+    private User mUser;
 
     private ProgressDialog progressDialog;
 
@@ -44,7 +49,7 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_profile);
+        setContentView(R.layout.activity_new_goal);
 
         //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -61,54 +66,82 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 
         //initializing views
         editTextName = (EditText) findViewById(R.id.editTextName);
+        spinnerStart = (Spinner) findViewById(R.id.spinnerStart);
+        spinnerEnd = (Spinner) findViewById(R.id.spinnerEnd);
 
-        buttonNext = (Button) findViewById(R.id.buttonNext);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
+
+        //getting current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
 
         progressDialog = new ProgressDialog(this);
 
+        mDatabase.child("users").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    mUser = dataSnapshot.getValue(User.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                // [START_EXCLUDE]
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
         //attaching listener to button
-        buttonNext.setOnClickListener(this);
+        buttonSave.setOnClickListener(this);
 
     }
 
-    private void createUserProfile(){
+    private void updateGoal() {
 
-        //getting email and password from edit texts
         String name = editTextName.getText().toString().trim();
+        String start = String.valueOf(spinnerStart.getSelectedItem());
+        String end = String.valueOf(spinnerEnd.getSelectedItem());
+
+        int startT = Integer.parseInt(start.substring(0, 2).trim());
+        int endT = Integer.parseInt(end.substring(0, 2).trim());
+        if (start.substring(start.length() - 2, start.length()) == "rs") {
+            startT *= 60;
+        }
+        if (end.substring(end.length() - 2, end.length()) == "rs") {
+            endT *= 60;
+        }
 
         //checking if email and passwords are empty
-        if(TextUtils.isEmpty(name)){
-            Toast.makeText(this,"Please enter name",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Please enter a goal", Toast.LENGTH_LONG).show();
             return;
         }
 
         //if the name box is not empty
         //displaying a progress dialog
 
-        progressDialog.setMessage("Updating Please Wait...");
-        progressDialog.show();
 
-        //updating user profile
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("NewGoalActivity", name);
+        if (mUser == null) {
+            Log.d("NewGoalActivity", "scREAM");
+        } else {
+            mUser.addGoal(new Goal(name, startT, endT));
+        }
+        startActivity(new Intent(getApplicationContext(), GoalManagerActivity.class));
 
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
-                .build();
 
-        user.updateProfile(profileUpdates)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("CreateProfileActivity", "User profile updated.");
+    }
 
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            writeNewUser(user.getEmail(), user.getUid(), user.getDisplayName());
+    public void onClick(View view) {
 
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        }
-                    }
-                });
+        if(view == buttonSave){
+            updateGoal();
+        }
+
+    }
+
 
 //        firebaseAuth.createUserWithEmailAndPassword(email, password)
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -126,22 +159,14 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
 //                    }
 //                });
 
-    }
+//    }
 
-    private void writeNewUser(String email, String userId, String name) {
-        HashMap<String, Goal> map = new HashMap<String, Goal>();
-        map.put("goal1", new Goal("Name", 0, 120));
-        User user = new User(email, name, map);
-
-        mDatabase.child("users").child(userId).setValue(user);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        if(view == buttonNext){
-            createUserProfile();
-        }
-
-    }
+//    @Override
+//    public void onClick(View view) {
+//
+//        if(view == buttonSave){
+//            updateGoal();
+//        }
+//
+//    }
 }

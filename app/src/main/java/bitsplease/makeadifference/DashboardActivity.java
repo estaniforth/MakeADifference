@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     public void navigateToProjectOverview(View v) {
-        Intent intent = new Intent(this, ProjectOverviewActivity.class);
+        Intent intent = new Intent(this, GoalManagerActivity.class);
         startActivity(intent);
     }
 }
