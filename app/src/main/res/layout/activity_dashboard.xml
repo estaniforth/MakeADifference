@@ -17,13 +17,13 @@
         <!--app:layout_constraintTop_toTopOf="parent" />-->
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#fff"
         android:id="@+id/projectbutton1"
-        android:layout_marginTop="118dp"
+        android:layout_marginTop="80dp"
         android:text="@string/btn_project1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,31 +31,31 @@
 
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/projectbutton2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="295dp"
+        android:layout_marginStart="-20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="#fff"
-        android:id="@+id/projectbutton2"
-        android:layout_marginBottom="295dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
         android:text="@string/btn_project2"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/projectbutton3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#fff"
         android:id="@+id/projectbutton3"
         android:layout_marginBottom="293dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginTop="67dp"
+        android:layout_marginEnd="-20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/btn_project3"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,27 +63,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:id="@+id/projectbutton4"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="#fff"
-        android:id="@+id/projectbutton4"
-        android:layout_marginStart="8dp"
         android:text="@string/btn_project4"
+        android:textColor="#fff"
         app:layout_constraintEnd_toStartOf="@+id/projectbutton5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/projectbutton1" />
 
     <Button
+        android:id="@+id/projectbutton5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/round_button"
         android:gravity="center_vertical|center_horizontal"
-        android:textColor="#fff"
-        android:id="@+id/projectbutton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
         android:text="@string/btn_project5"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/projectbutton4"
         app:layout_constraintTop_toBottomOf="@+id/projectbutton1" />

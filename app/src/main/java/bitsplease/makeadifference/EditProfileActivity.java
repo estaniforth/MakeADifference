@@ -61,7 +61,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         editTextName.setText(user.getDisplayName());
         editTextEmail.setText(user.getEmail());
-        editTextPassword.setText("......");
 
         progressDialog = new ProgressDialog(this);
 
@@ -119,15 +118,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         String newPassword = password;
 
-        user.updatePassword(newPassword)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("EditProfileActivity", "User password updated.");
+        if(!TextUtils.isEmpty(newPassword)) {
+            user.updatePassword(newPassword)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("EditProfileActivity", "User password updated.");
+                            }
                         }
-                    }
-                });
+                    });
+        }
 
 //        firebaseAuth.createUserWithEmailAndPassword(email, password)
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
