@@ -12,10 +12,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.NavigableMap;
+
 public class MainActivity extends AppCompatActivity {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
 
     Button button;
+    Button button2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
                 next_page(v);
             }
         });
+
+        button2 = (Button) findViewById(R.id.DASHBOARD);
+        button2.setOnClickListener( new View.OnClickListener(){
+            public void onClick (View v){
+                navigateToDashboard(v);
+            }
+        });
+
+
     }
 
     /**
@@ -80,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void next_page(View v) {
         Intent intent = new Intent(this, FeedActivity.class);
+        startActivity(intent);
+    }
+
+    public void navigateToDashboard(View v) {
+        Intent intent = new Intent(this, DashboardActivity.class);
         startActivity(intent);
     }
 }
