@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MakeADifference</string>
+    <string name="title_activity_feed">FeedActivity</string>
 </resources>
