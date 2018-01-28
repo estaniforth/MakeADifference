@@ -9,9 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
+
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             initializeView();
         }
+
+        Log.d("Main Activity", "Hello World!!");
+
+        button = (Button) findViewById(R.id.FEED);
+        button.setOnClickListener( new View.OnClickListener(){
+            public void onClick (View v){
+                next_page(v);
+            }
+        });
     }
 
     /**
@@ -63,5 +76,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void next_page(View v) {
+        Intent intent = new Intent(this, FeedActivity.class);
+        startActivity(intent);
     }
 }
