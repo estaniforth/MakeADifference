@@ -29,6 +29,7 @@
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="prompt_password">Please enter your password.</string>
     <string name="btn_project1">Daily Drawing</string>
     <string name="btn_project2">GitFit</string>
     <string name="btn_project3">The Pursuit of Happyness</string>

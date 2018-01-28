@@ -12,13 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".FeedActivity"
             android:theme="@style/AppTheme" />
@@ -29,6 +24,19 @@
             android:exported="true" />
 
         <activity android:name=".ChatActivity" />
+        <!-- <activity android:name=".SignupActivity" /> -->
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".CreateProfileActivity" />
+        <activity android:name=".EditProfileActivity"></activity>
         <activity android:name=".DashboardActivity" />
         <activity android:name=".ProjectOverviewActivity"></activity>
     </application>
